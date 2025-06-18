@@ -1,0 +1,21 @@
+print("만일 대답이 '예'일 경우 1을, '아니오'일 경우 0을 입력해주세요.")
+Snot=input("콧물이 나나요? ")
+Sneeze=input("재채기를 하나요? ")
+Headache=input("두통이 있나요? ")
+Fever=input("열이 나나요? ")
+Cough=input("기침을 하나요? ")
+RedSpot=input("몸에 붉은 반점이 생겼나요? ")
+EyeInflam=input("결막염이 생겼나요? ")
+
+FirstDiseaseName = {
+    'Snot': Snot,
+    'Sneeze': Sneeze,
+    'Headache': Headache,
+    'Fever': Fever,
+    'Cough': Cough,
+    'Redspot': RedSpot,
+    'EyeInflame': EyeInflam,
+}
+
+SecondDiseaseName = [name for name, value in FirstDiseaseName.items() if value == "1"]
+print(SecondDiseaseName)
