@@ -19,3 +19,12 @@ FirstDiseaseName = {
 
 SecondDiseaseName = [name for name, value in FirstDiseaseName.items() if value == "1"]
 print(SecondDiseaseName)
+
+for i in range(6):Add commentMore actions
+    if SecondDiseaseName[i] == "Headache":
+        for j in range(6):
+            if SecondDiseaseName[j] == "Fever":
+                print("98")
+    elif SecondDiseaseName[i] == "Redspot":
+    elif SecondDiseaseName[i] == "EyeInflame":
+    elif SecondDiseaseName[i] == "Cough"
