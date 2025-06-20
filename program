@@ -20,11 +20,27 @@ FirstDiseaseName = {
 SecondDiseaseName = [name for name, value in FirstDiseaseName.items() if value == "1"]
 print(SecondDiseaseName)
 
-for i in range(6):Add commentMore actions
-    if SecondDiseaseName[i] == "Headache":
-        for j in range(6):
-            if SecondDiseaseName[j] == "Fever":
-                print("98")
-    elif SecondDiseaseName[i] == "Redspot":
-    elif SecondDiseaseName[i] == "EyeInflame":
-    elif SecondDiseaseName[i] == "Cough"
+
+for i in range(6):
+   if SecondDiseaseName[i] == "Headache":
+    for j in range(6):
+      if SecondDiseaseName[j] == "Fever":
+        FirstMusclePain = input("근육통이 있나요?")
+        FirstSensationLoss = input("감각 상실이 있나요?")
+        FirstChill = input("오한이 드나요?")
+  if SecondDiseaseName[i] == "Redspot":
+    FirstSoreThroat = input("인후통이 있나요?")
+    FirstBlister = input("물집이 생겼나요?")
+  if SecondDiseaseName[i] == "EyeInflame":
+    FirstVaccine = input("백일해 백신을 접종했나요?")
+    FirstVomit = input("기침 한 뒤 구토한 적이 있나요?")
+  if SecondDiseaseName[i] == "Cough":
+
+   AddDiseaseName = {
+       'MusclePain'=FirstMusclePain
+       'SensationLoss'=FirstSensationLoss
+       'Chill'=FirstChill
+   }
+
+SecondDiseaseName = [name for name, value in FirstDiseaseName.items() if value == "1"]
+print(SecondDiseaseName)
