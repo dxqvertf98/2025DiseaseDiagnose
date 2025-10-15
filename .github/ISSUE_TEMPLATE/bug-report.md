@@ -2,7 +2,7 @@
 name: Bug Report
 about: 버그 난 거 작성
 title: "[버그]"
-labels: bug
+labels: bug, enhancement
 assignees: dxqvertf98
 
 ---
