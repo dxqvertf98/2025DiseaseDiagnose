@@ -1,30 +1,55 @@
-print("만일 대답이 '예'일 경우 y를 '아니오'일 경우 n을 입력해주세요")
-Snot=input("콧물이 나나요? <y/n>")
-Sneeze=input("재채기를 하나요? <y/n>")
-Headache=input("두통이 있나요? <y/n>")
-Fever=input("열이 나나요? <y/n>")
-Cough=input("기침을 하나요? <y/n>")
-Redspot=input("몸에 붉은 반점이 생겼나요? <y/n>")
-EyeInflam=input("결막염이 생겼나요? <y/n>")
+import random
 
-FirstDiseaseName = {
-    'Snot': Snot,
-    'Sneeze': Sneeze,
-    'Headache': Headache,
-    'Fever': Fever,
-    'Cough': Cough,
-    'Redspot': Redspot,
-    'EyeInflame': EyeInflam,
+# 각 질병별 주요 증상
+disease_attributes = {
+    "감기": ["기침", "열", "목아픔", "콧물"],
+    "독감": ["기침", "열", "목아픔", "전신 근육통"],
+    "코로나": ["기침", "열", "목아픔", "후각 상실"]
 }
 
-SecondDiseaseName = [name for name, value in FirstDiseaseName.items() if value == "1"]
-print(SecondDiseaseName)
+# 증상별 질병에 대한 가중치
+attribute_weights = {
+    "기침": {"감기": 8, "독감": 6, "코로나": 5},
+    "열": {"감기": 6, "독감": 8, "코로나": 9},
+    "목아픔": {"감기": 7, "독감": 7, "코로나": 6},
+    "전신 근육통": {"감기": 5, "독감": 7, "코로나": 9},
+    "콧물": {"감기": 9, "독감": 3, "코로나": 2},
+    "후각 상실": {"감기": 2, "독감": 3, "코로나": 9}
+}
 
-FirstMusclePain = "y"
-FirstSensationLoss = "y"
-FirstChill = "y"
-FirstSoreThroat = "y"
-FirstBlister = "y"
-FirstVaccine = "y"
-FirstVomit = "y"
-FirstChestPressure = "y"
+# 2024년 발생 환자 수 (가상의 수치)
+disease_population = {
+    "감기": 1200000,
+    "독감": 800000,
+    "코로나": 600000
+}
+
+# 환자의 현재 증상
+patient_symptoms = ["기침", "열", "목아픔"]
+
+# 1단계: 질병 후보 필터링
+candidate_diseases = []
+for disease, attrs in disease_attributes.items():
+    match_count = len(set(patient_symptoms) & set(attrs))
+    if match_count > 0:
+        candidate_diseases.append(disease)
+
+# 2단계: 질병별 점수 계산
+disease_scores = {}
+for disease in candidate_diseases:
+    base_score = 0
+    for symptom in patient_symptoms:
+        base_score += attribute_weights.get(symptom, {}).get(disease, 0)
+
+    match_ratio = len(set(patient_symptoms) & set(disease_attributes[disease])) / len(disease_attributes[disease])
+    population_factor = (disease_population[disease] / max(disease_population.values()))
+    random_factor = random.uniform(0.95, 1.05)  # 개인차 반영
+
+    final_score = (base_score * match_ratio * 0.7 + base_score * 0.3) * (0.6 + 0.4 * population_factor) * random_factor
+    disease_scores[disease] = final_score
+
+# 3단계: 정렬 및 출력
+sorted_diseases = sorted(disease_scores.items(), key=lambda x: x[1], reverse=True)
+
+for i, (disease, score) in enumerate(sorted_diseases, start=1):
+    print(f"{i}순위: {disease} (진단 점수: {score:.2f})")
